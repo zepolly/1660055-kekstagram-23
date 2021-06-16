@@ -1,5 +1,8 @@
 /* eslint-disable id-length */
-import {getRandomNumber, checkMaxLengthString} from './util.js';
+import {getRandomNumber} from './util.js';
+
+const MIN_AVATAR_NUMBER = 1;
+const MAX_AVATAR_NUMBER = 6;
 
 const DESCRIPTIONS_PHOTO = [
   'Это просто я',
@@ -51,7 +54,7 @@ const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements
 const createComments = (index) => ({
   return: {
     id: index,
-    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    avatar: `img/avatar-${getRandomNumber(MIN_AVATAR_NUMBER, MAX_AVATAR_NUMBER)}.svg`,
     message: getRandomArrayElement(COMMENTS_LIST),
     name: getRandomArrayElement(NAMES),
   },
@@ -66,5 +69,3 @@ const createPhoto = (index) => ({
 });
 
 new Array(getRandomNumber(1, 25)).fill(null).map((item, index) => createPhoto(index + 1));
-
-checkMaxLengthString;
