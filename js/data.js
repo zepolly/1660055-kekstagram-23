@@ -1,8 +1,12 @@
-/* eslint-disable id-length */
 import {getRandomNumber} from './util.js';
 
 const MIN_AVATAR_NUMBER = 1;
 const MAX_AVATAR_NUMBER = 6;
+const POST_PHOTO_NUMBER = 25;
+const MIN_COMMENT_NUMBER = 1;
+const MAX_COMMENT_NUMBER = 5;
+const MIN_LIKES_NUMBER = 15;
+const MAX_LIKES_NUMBER = 200;
 
 const DESCRIPTIONS_PHOTO = [
   'Это просто я',
@@ -54,7 +58,7 @@ const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements
 const createComments = (index) => ({
   return: {
     id: index,
-    avatar: `img/avatar-${getRandomNumber(MIN_AVATAR_NUMBER, MAX_AVATAR_NUMBER)}.svg`,
+    avatar: `img/avatar${getRandomNumber(MIN_AVATAR_NUMBER, MAX_AVATAR_NUMBER)}.svg`,
     message: getRandomArrayElement(COMMENTS_LIST),
     name: getRandomArrayElement(NAMES),
   },
@@ -64,8 +68,8 @@ const createPhoto = (index) => ({
   id: index,
   url: `photos/${index}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS_PHOTO),
-  likes: getRandomNumber(15, 200),
-  comments: new Array(getRandomNumber(1, 5)).fill(null).map((item, i) => createComments(i + 1)),
+  likes: getRandomNumber(MIN_LIKES_NUMBER, MAX_LIKES_NUMBER),
+  comments: new Array(getRandomNumber(MIN_COMMENT_NUMBER, MAX_COMMENT_NUMBER)).fill(null).map((item, idx) => createComments(idx + 1)),
 });
 
-new Array(getRandomNumber(1, 25)).fill(null).map((item, index) => createPhoto(index + 1));
+new Array(getRandomNumber(POST_PHOTO_NUMBER)).fill(null).map((item, index) => createPhoto(index + 1));
