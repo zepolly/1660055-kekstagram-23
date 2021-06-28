@@ -14,4 +14,6 @@ function checkMaxLengthString (line, maxLine) {
   return (line.length <= maxLine);
 }
 
-export {getRandomNumber, checkMaxLengthString};
+const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+
+export {getRandomNumber, checkMaxLengthString, isEscEvent};
