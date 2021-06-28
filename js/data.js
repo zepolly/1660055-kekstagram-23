@@ -72,4 +72,6 @@ const createPhoto = (index) => ({
   comments: new Array(getRandomNumber(MIN_COMMENT_NUMBER, MAX_COMMENT_NUMBER)).fill(null).map((item, idx) => createComments(idx + 1)),
 });
 
-new Array(getRandomNumber(POST_PHOTO_NUMBER)).fill(null).map((item, index) => createPhoto(index + 1));
+const postPhoto = new Array(getRandomNumber(POST_PHOTO_NUMBER)).fill(null).map((item, index) => createPhoto(index + 1));
+
+export {postPhoto};
