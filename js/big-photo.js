@@ -4,8 +4,8 @@ import {picturesList} from './mini-photo.js';
 
 const COMMENT_STEP = 5;
 const body = document.querySelector('body');
-const blockBigPhoto = document.querySelector('.big-picture');
-const previewPicture = body.querySelector('.big-picture__img').querySelector('img');
+const blockBigPhoto = body.querySelector('.big-picture');
+const previewPicture = blockBigPhoto.querySelector('.big-picture__img').querySelector('img');
 const photoLikes = body.querySelector('.likes-count');
 const photoCommentsCount = body.querySelector('.comments-count');
 const photoDescription = body.querySelector('.social__caption');
@@ -13,8 +13,8 @@ const photoListComments = body.querySelector('.social__comments');
 const buttonClose = body.querySelector('.big-picture__cancel');
 const blockCommentsCount = body.querySelector('.social__comment-count');
 const buttonUploadedComments = body.querySelector('.comments-loader');
-const pictures = document.querySelectorAll('.picture');
-const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
+const pictures = body.querySelectorAll('.picture');
+const commentTemplate = body.querySelector('#comment').content.querySelector('.social__comment');
 let lastShownIndex = 0;
 
 const onPreviewEscKeydown = (evt) => {
@@ -67,28 +67,24 @@ const renderComments = (comments) => {
   }
 };
 
-const clickMiniPhoto = () => {
-  const onPictureClickHandler = (elem) => {
-    const pictureElement = elem.closest('.picture');
-    if (pictureElement) {
-      openPreviewBlock();
-      const index = Array.from(pictures).findIndex(() => elem === pictureElement);
-      const photoInfo = postPhoto[index];
-      const {url, likes, comments, description} = photoInfo;
-      previewPicture.src = url;
-      photoLikes.textContent = likes;
-      photoCommentsCount.textContent = comments.length;
-      photoDescription.textContent = description;
-      photoListComments.innerHTML = '';
-      renderComments(comments);
-      lastShownIndex = 0;
-      showComments();
-    }
-  };
-
-  picturesList.addEventListener('click', (evt) => {
-    onPictureClickHandler(evt.target);
-  });
+const onPictureClickHandler = (elem) => {
+  const pictureElement = elem.closest('.picture');
+  if (pictureElement) {
+    openPreviewBlock();
+    const index = Array.from(pictures).findIndex(() => elem === pictureElement);
+    const photoInfo = postPhoto[index];
+    const {url, likes, comments, description} = photoInfo;
+    previewPicture.src = url;
+    photoLikes.textContent = likes;
+    photoCommentsCount.textContent = comments.length;
+    photoDescription.textContent = description;
+    photoListComments.innerHTML = '';
+    renderComments(comments);
+    lastShownIndex = 0;
+    showComments();
+  }
 };
 
-export {clickMiniPhoto};
+picturesList.addEventListener('click', (evt) => {
+  onPictureClickHandler(evt.target);
+});
