@@ -1,26 +1,26 @@
-import {isEscEvent} from './util.js';
+import {isEscEvent} from './utils.js';
 import {postPhoto} from './data.js';
 import {picturesList} from './mini-photo.js';
 
+const COMMENT_STEP = 5;
 const body = document.querySelector('body');
-const block = document.querySelector('.big-picture');
-const previewPicture = block.querySelector('.big-picture__img').querySelector('img');
-const photoLikes = block.querySelector('.likes-count');
-const photoCommentsCount = block.querySelector('.comments-count');
-const photoDescription = block.querySelector('.social__caption');
-const photoListComments = block.querySelector('.social__comments');
-const buttonClose = block.querySelector('.big-picture__cancel');
-const blockCommentsCount = block.querySelector('.social__comment-count');
-const buttonUploadedComments = block.querySelector('.comments-loader');
+const blockBigPhoto = document.querySelector('.big-picture');
+const previewPicture = blockBigPhoto.querySelector('.big-picture__img').querySelector('img');
+const photoLikes = blockBigPhoto.querySelector('.likes-count');
+const photoCommentsCount = blockBigPhoto.querySelector('.comments-count');
+const photoDescription = blockBigPhoto.querySelector('.social__caption');
+const photoListComments = blockBigPhoto.querySelector('.social__comments');
+const buttonClose = blockBigPhoto.querySelector('.big-picture__cancel');
+const blockCommentsCount = blockBigPhoto.querySelector('.social__comment-count');
+const buttonUploadedComments = blockBigPhoto.querySelector('.comments-loader');
 const pictures = document.querySelectorAll('.picture');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
-const COMMENT_STEP = 5;
 let lastShownIndex = 0;
 
 const onPreviewEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
-    block.classList.add('hidden');
+    blockBigPhoto.classList.add('hidden');
     body.classList.remove('modal-open');
   }
 };
@@ -38,14 +38,14 @@ const showComments = () => {
 };
 
 const openPreviewBlock = () => {
-  block.classList.remove('hidden');
+  blockBigPhoto.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onPreviewEscKeydown);
   buttonUploadedComments.addEventListener('click', showComments);
 };
 
 const closeWindow = () => {
-  block.classList.add('hidden');
+  blockBigPhoto.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPreviewEscKeydown);
   buttonUploadedComments.removeEventListener('click', showComments);
