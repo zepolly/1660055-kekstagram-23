@@ -5,14 +5,14 @@ import {picturesList} from './mini-photo.js';
 const COMMENT_STEP = 5;
 const body = document.querySelector('body');
 const blockBigPhoto = document.querySelector('.big-picture');
-const previewPicture = blockBigPhoto.querySelector('.big-picture__img').querySelector('img');
-const photoLikes = blockBigPhoto.querySelector('.likes-count');
-const photoCommentsCount = blockBigPhoto.querySelector('.comments-count');
-const photoDescription = blockBigPhoto.querySelector('.social__caption');
-const photoListComments = blockBigPhoto.querySelector('.social__comments');
-const buttonClose = blockBigPhoto.querySelector('.big-picture__cancel');
-const blockCommentsCount = blockBigPhoto.querySelector('.social__comment-count');
-const buttonUploadedComments = blockBigPhoto.querySelector('.comments-loader');
+const previewPicture = body.querySelector('.big-picture__img').querySelector('img');
+const photoLikes = body.querySelector('.likes-count');
+const photoCommentsCount = body.querySelector('.comments-count');
+const photoDescription = body.querySelector('.social__caption');
+const photoListComments = body.querySelector('.social__comments');
+const buttonClose = body.querySelector('.big-picture__cancel');
+const blockCommentsCount = body.querySelector('.social__comment-count');
+const buttonUploadedComments = body.querySelector('.comments-loader');
 const pictures = document.querySelectorAll('.picture');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 let lastShownIndex = 0;
@@ -67,12 +67,12 @@ const renderComments = (comments) => {
   }
 };
 
-function clickingMiniPhoto () {
-  picturesList.addEventListener('click', (evt) => {
-    const pictureElement = evt.target.closest('.picture');
+const clickMiniPhoto = () => {
+  const onPictureClickHandler = (elem) => {
+    const pictureElement = elem.closest('.picture');
     if (pictureElement) {
       openPreviewBlock();
-      const index = Array.from(pictures).findIndex((elem) => elem === pictureElement);
+      const index = Array.from(pictures).findIndex(() => elem === pictureElement);
       const photoInfo = postPhoto[index];
       const {url, likes, comments, description} = photoInfo;
       previewPicture.src = url;
@@ -84,7 +84,11 @@ function clickingMiniPhoto () {
       lastShownIndex = 0;
       showComments();
     }
-  });
-}
+  };
 
-export {clickingMiniPhoto};
+  picturesList.addEventListener('click', (evt) => {
+    onPictureClickHandler(evt.target);
+  });
+};
+
+export {clickMiniPhoto};
