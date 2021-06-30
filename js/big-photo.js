@@ -5,7 +5,7 @@ import {picturesList} from './mini-photo.js';
 const COMMENT_STEP = 5;
 const body = document.querySelector('body');
 const blockBigPhoto = body.querySelector('.big-picture');
-const previewPicture = blockBigPhoto.querySelector('.big-picture__img').querySelector('img');
+const previewPicture = body.querySelector('.big-picture__img').querySelector('img');
 const photoLikes = body.querySelector('.likes-count');
 const photoCommentsCount = body.querySelector('.comments-count');
 const photoDescription = body.querySelector('.social__caption');
