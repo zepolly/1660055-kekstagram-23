@@ -67,20 +67,24 @@ const renderComments = (comments) => {
   }
 };
 
-picturesList.addEventListener('click', (evt) => {
-  const pictureElement = evt.target.closest('.picture');
-  if (pictureElement) {
-    openPreviewBlock();
-    const index = Array.from(pictures).findIndex((elem) => elem === pictureElement);
-    const photoInfo = postPhoto[index];
-    const {url, likes, comments, description} = photoInfo;
-    previewPicture.src = url;
-    photoLikes.textContent = likes;
-    photoCommentsCount.textContent = comments.length;
-    photoDescription.textContent = description;
-    photoListComments.innerHTML = '';
-    renderComments(comments);
-    lastShownIndex = 0;
-    showComments();
-  }
-});
+function clickingMiniPhoto () {
+  picturesList.addEventListener('click', (evt) => {
+    const pictureElement = evt.target.closest('.picture');
+    if (pictureElement) {
+      openPreviewBlock();
+      const index = Array.from(pictures).findIndex((elem) => elem === pictureElement);
+      const photoInfo = postPhoto[index];
+      const {url, likes, comments, description} = photoInfo;
+      previewPicture.src = url;
+      photoLikes.textContent = likes;
+      photoCommentsCount.textContent = comments.length;
+      photoDescription.textContent = description;
+      photoListComments.innerHTML = '';
+      renderComments(comments);
+      lastShownIndex = 0;
+      showComments();
+    }
+  });
+}
+
+export {clickingMiniPhoto};
